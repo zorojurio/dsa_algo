@@ -79,6 +79,19 @@ class CDLL:
                     break
                 temp = temp.prev
 
+    def search(self, value):
+        if self.head is None:
+            return False
+        else:
+            temp = self.head
+            while temp:
+                if value == temp.value:
+                    return temp
+                if self.tail == temp:
+                    break
+                temp = temp.next
+            return False
+
 
 if __name__ == '__main__':
     linked_list = CDLL()
@@ -94,4 +107,7 @@ if __name__ == '__main__':
     print([node.value for node in linked_list])
 
     linked_list.reverse_traverse()
+    print("Searching")
+    print(linked_list.search(5).value)
+    print(linked_list.search(99).value)
 
