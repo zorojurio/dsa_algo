@@ -92,6 +92,43 @@ class CDLL:
                 temp = temp.next
             return False
 
+    def delete(self, location):
+        if self.head is None:
+            return False
+        else:
+            if location == 0:
+                if self.head == self.tail:
+                    self.head.next = None
+                    self.head.prev = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.head = self.head.next
+                    self.head.prev = self.tail
+                    self.tail.next = self.head
+
+            elif location == -1:
+                if self.head == self.tail:
+                    self.head.next = None
+                    self.head.prev = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.tail = self.tail.prev
+                    self.tail.next = self.head
+                    self.head.prev = self.tail
+            else:
+                current_node = self.head
+                index = 0
+                while index < location - 1:
+                    index += 1
+                    current_node = current_node.next
+                current_node.next = current_node.next.next
+                current_node.next.prev = current_node
+                return True
+
+
+
 
 if __name__ == '__main__':
     linked_list = CDLL()
@@ -106,8 +143,12 @@ if __name__ == '__main__':
     linked_list.insert(99, -1)
     print([node.value for node in linked_list])
 
-    linked_list.reverse_traverse()
-    print("Searching")
-    print(linked_list.search(5).value)
-    print(linked_list.search(99).value)
+    # linked_list.reverse_traverse()
+    # print("Searching")
+    # print(linked_list.search(5).value)
+    # print(linked_list.search(99).value)
+
+    print("Deletion ")
+    linked_list.delete(2)
+    print([node.value for node in linked_list])
 
