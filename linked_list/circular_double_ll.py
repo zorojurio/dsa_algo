@@ -68,6 +68,17 @@ class CDLL:
                     break
                 temp = temp.next
 
+    def reverse_traverse(self):
+        if self.head is None:
+            return False
+        else:
+            temp = self.tail
+            while temp:
+                print(temp.value)
+                if temp == self.head:
+                    break
+                temp = temp.prev
+
 
 if __name__ == '__main__':
     linked_list = CDLL()
@@ -81,4 +92,6 @@ if __name__ == '__main__':
     print([node.value for node in linked_list])
     linked_list.insert(99, -1)
     print([node.value for node in linked_list])
-    linked_list.traverse()
+
+    linked_list.reverse_traverse()
+
