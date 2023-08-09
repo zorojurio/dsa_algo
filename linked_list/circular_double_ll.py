@@ -127,7 +127,23 @@ class CDLL:
                 current_node.next.prev = current_node
                 return True
 
-
+    def delete_entire_list(self):
+        """
+        Remove all the references to node so, they will be eligible for Garbage Collection
+        :return:
+        """
+        if self.head is None:
+            return False
+        else:
+            self.tail.next = None
+            self.head.prev = None
+            temp = self.head
+            while temp:
+                temp.prev = None
+                temp = temp.next
+            self.head = None
+            self.tail = None
+            print("Successfully Deleted the Linked List")
 
 
 if __name__ == '__main__':
@@ -150,5 +166,7 @@ if __name__ == '__main__':
 
     print("Deletion ")
     linked_list.delete(2)
+    print([node.value for node in linked_list])
+    linked_list.delete_entire_list()
     print([node.value for node in linked_list])
 
