@@ -30,7 +30,8 @@ class Stack:
         else:
             return self.list_[len(self.list_) - 1]
 
-
+    def delete(self):
+        self.list_ = []
 
 
 stack = Stack(5)
@@ -47,4 +48,8 @@ print()
 print(stack.pop())
 
 print()
+print(stack)
+
+print()
+stack.delete()
 print(stack)
