@@ -32,3 +32,11 @@ print(queue.peek())
 print(queue.dequeue())
 print(queue)
 
+list_ = [1, 2, 2, 2, 2, 3]
+print(list_.pop(-1))
+print(list_.pop(-1))
+print(list_.pop(-1))
+print(list_.pop(-1))
+print(list_.pop(-1))
+print(list_.pop(-1))
+print(list_.pop(-1))
