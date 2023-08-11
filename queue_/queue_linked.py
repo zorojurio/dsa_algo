@@ -28,6 +28,11 @@ class Queue:
         return '\n'.join(values)
 
     def enqueue(self, value):
+        """
+        add element to the end of the list
+        :param value:
+        :return:
+        """
         node = Node(value)
         if self.linked_list.head is None:
             self.linked_list.head = node
@@ -51,6 +56,16 @@ class Queue:
                 self.linked_list.head = self.linked_list.head.next
             return temp_node
 
+    def peek(self):
+        if self.is_empty():
+            return "Empty Queue"
+        else:
+            return self.linked_list.head
+
+    def delete(self):
+        self.linked_list.head = None
+        self.linked_list.tail = None
+
 
 if __name__ == '__main__':
     queue = Queue()
@@ -58,6 +73,7 @@ if __name__ == '__main__':
     queue.enqueue(2)
     queue.enqueue(3)
     queue.enqueue(4)
+    print("peek ", queue.peek())
 
     print("***********")
     queue.dequeue()
@@ -74,4 +90,4 @@ if __name__ == '__main__':
     print("***********")
     queue.dequeue()
     print(queue)
-
+    queue.delete()
