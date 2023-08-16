@@ -155,6 +155,13 @@ def delete_node_bt(root_node: TreeNode, node_value):
         return "Failed to delete the node"
 
 
+def delete_binary_tree(root_node: TreeNode):
+    root_node.data = None
+    root_node.left_child = None
+    root_node.right_child = None
+    return "Deleted Successfully"
+
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -195,3 +202,4 @@ if __name__ == '__main__':
     print(f"Deleting a node, deepest Node is {get_deepest_node(tree)} will be replaced with Tea")
     print(delete_node_bt(tree, 'Tea'))
     level_order_traversal(tree)
+    delete_binary_tree(tree)
