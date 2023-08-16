@@ -53,7 +53,11 @@ class BinaryTree:
                 self.custom_list[self.last_used_index] = None
                 self.last_used_index -= 1
                 return "Node deleted successfully"
-        return f'{value} is not exist in the list'
+        return f'{value} does not exist in the list'
+
+    def delete_tree(self):
+        self.custom_list = None
+        return 'Binary Tree is deleted successfully'
 
 
 new_binary_tree = BinaryTree(8)
@@ -76,3 +80,5 @@ print(new_binary_tree.delete('Tea'))
 new_binary_tree.level_order_traversal()
 print(new_binary_tree.delete('Teas'))
 new_binary_tree.level_order_traversal()
+new_binary_tree.delete_tree()
+print(new_binary_tree.custom_list)
