@@ -74,6 +74,24 @@ def level_order_traversal(root_node: BinarySearchTreeNode):
                 custom_queue.put(root.right_node)
 
 
+def search(root_node: BinarySearchTreeNode, value):
+    if root_node is None:
+        return None
+    if root_node.data == value:
+        print(f'Value {value} found')
+    elif value <= root_node.data:
+        if root_node.left_node and root_node.left_node.data == value:
+            print(f'Value {value} found')
+        else:
+            search(root_node.left_node, value)
+    else:
+        if root_node.right_node and root_node.right_node.data == value:
+            print(f'Value {value} found')
+        else:
+            search(root_node.right_node, value)
+
+
+
 if __name__ == '__main__':
     bst = BinarySearchTreeNode(70)
     print(insert(bst, 50))
@@ -92,3 +110,6 @@ if __name__ == '__main__':
     print()
     level_order_traversal(root_node=bst)
     print()
+    search(bst, 40)
+    search(bst, 60)
+    search(bst, 1000)
