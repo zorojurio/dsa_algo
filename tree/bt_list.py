@@ -39,9 +39,13 @@ class BinaryTree:
         self.post_order_traversal(index * 2 + 1)
         print(self.custom_list[index])
 
+    def level_order_traversal(self):
+        for i in range(self.last_used_index+1):
+            if self.custom_list[i]:
+                print(self.custom_list[i])
+
 
 new_binary_tree = BinaryTree(8)
-
 new_binary_tree.insert('Drinks')
 new_binary_tree.insert('Hot')
 new_binary_tree.insert('Cold')
@@ -55,3 +59,5 @@ print("\nin order traversal")
 new_binary_tree.in_order_traversal()
 print("\npost order traversal")
 new_binary_tree.post_order_traversal()
+print("\nlevel order traversal")
+new_binary_tree.level_order_traversal()
