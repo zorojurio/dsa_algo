@@ -90,6 +90,71 @@ def insert_node(root_node: TreeNode, node_value):
                 root.right_child = node
                 return node
 
+
+def get_deepest_node(root_node: TreeNode):
+    root = None
+    if root_node is None:
+        return None
+    else:
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            if root.left_child is not None:
+                custom_queue.put(root.left_child)
+            if root.right_child is not None:
+                custom_queue.put(root.right_child)
+
+        deepest_node_ = root
+        return deepest_node_
+
+
+def delete_deepest_node(root_node: TreeNode, deepest_node: TreeNode):
+    if root_node is None:
+        return None
+    else:
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            if root is deepest_node:
+                del root
+                return
+            if root.right_child:
+                if root.right_child is deepest_node:
+                    root.right_child = None
+                    return
+                else:
+                    custom_queue.put(root.right_child)
+
+            if root.left_child:
+                if root.left_child is deepest_node:
+                    root.left_child = None
+                    return
+                else:
+                    custom_queue.put(root.left_child)
+
+
+def delete_node_bt(root_node: TreeNode, node_value):
+    if root_node is None:
+        return None
+    else:
+        deepest_node = get_deepest_node(root_node)
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            if root.data == node_value:
+                root.data = deepest_node.data
+                delete_deepest_node(tree, deepest_node)
+                return "Node Deleted"
+            if root.left_child is not None:
+                custom_queue.put(root.left_child)
+            if root.right_child is not None:
+                custom_queue.put(root.right_child)
+        return "Failed to delete the node"
+
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -117,4 +182,16 @@ if __name__ == '__main__':
     level_order_traversal(tree)
     print("**********************\n")
     insert_node(root_node=tree, node_value='Cola')
+    level_order_traversal(tree)
+
+    print("**********************\n")
+    deepest_nod = get_deepest_node(tree)
+    print("Deepest Node", deepest_nod.data)
+    delete_deepest_node(tree, deepest_nod)
+    insert_node(tree, node_value=deepest_nod.data)
+    print("********************** after deleting deepest Node \n")
+    level_order_traversal(tree)
+    print("**********************\n")
+    print(f"Deleting a node, deepest Node is {get_deepest_node(tree)} will be replaced with Tea")
+    print(delete_node_bt(tree, 'Tea'))
     level_order_traversal(tree)
