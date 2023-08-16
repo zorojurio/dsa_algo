@@ -24,6 +24,14 @@ def inorder_traversal(root_node: TreeNode):
     inorder_traversal(root_node.right_child)
 
 
+def post_order_traversal(root_node: TreeNode):
+    if root_node is None:
+        return None
+    post_order_traversal(root_node=root_node.left_child)
+    post_order_traversal(root_node=root_node.right_child)
+    print(root_node.data)
+
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -38,3 +46,5 @@ if __name__ == '__main__':
     preorder_traversal(tree)
     print("**********************\n")
     inorder_traversal(root_node=tree)
+    print("**********************\n")
+    post_order_traversal(root_node=tree)
