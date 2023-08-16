@@ -32,6 +32,13 @@ class BinaryTree:
         print(self.custom_list[index])
         self.in_order_traversal(index * 2 + 1)
 
+    def post_order_traversal(self, index=1):
+        if index > self.last_used_index:
+            return
+        self.post_order_traversal(index * 2)
+        self.post_order_traversal(index * 2 + 1)
+        print(self.custom_list[index])
+
 
 new_binary_tree = BinaryTree(8)
 
@@ -46,3 +53,5 @@ print("\npre order traversal")
 new_binary_tree.pre_order_traversal()
 print("\nin order traversal")
 new_binary_tree.in_order_traversal()
+print("\npost order traversal")
+new_binary_tree.post_order_traversal()
