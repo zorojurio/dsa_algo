@@ -67,6 +67,29 @@ def search_binary_tree(root_node: TreeNode, node_value):
         return f'{node_value} does not exists in the tree'
 
 
+def insert_node(root_node: TreeNode, node_value):
+    node = TreeNode(node_value)
+    if root_node is None:
+        root_node = node
+        return root_node
+    else:
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            if root.data == node_value:
+                return root
+            if root.left_child is not None:
+                custom_queue.put(root.left_child)
+            else:
+                root.left_child = node
+                return node
+            if root.right_child is not None:
+                custom_queue.put(root.right_child)
+            else:
+                root.right_child = node
+                return node
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -89,3 +112,9 @@ if __name__ == '__main__':
     print(search_binary_tree(tree, 'Tea'))
     print(search_binary_tree(tree, 'Coffee'))
     print(search_binary_tree(tree, 'Lemon'))
+    print("**********************\n")
+    insert_node(root_node=tree, node_value='Fanta')
+    level_order_traversal(tree)
+    print("**********************\n")
+    insert_node(root_node=tree, node_value='Cola')
+    level_order_traversal(tree)
