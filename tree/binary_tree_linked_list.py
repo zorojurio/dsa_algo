@@ -50,6 +50,23 @@ def level_order_traversal(root_node: TreeNode):
                 custom_queue.put(root.right_child)
 
 
+def search_binary_tree(root_node: TreeNode, node_value):
+    if root_node is None:
+        return "The Binary Tree does not exist"
+    else:
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            if root.data == node_value:
+                return root
+            if root.left_child is not None:
+                custom_queue.put(root.left_child)
+            if root.right_child is not None:
+                custom_queue.put(root.right_child)
+        return f'{node_value} does not exists in the tree'
+
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -68,3 +85,7 @@ if __name__ == '__main__':
     post_order_traversal(root_node=tree)
     print("**********************\n")
     level_order_traversal(root_node=tree)
+    print("**********************\n")
+    print(search_binary_tree(tree, 'Tea'))
+    print(search_binary_tree(tree, 'Coffee'))
+    print(search_binary_tree(tree, 'Lemon'))
