@@ -1,3 +1,6 @@
+from queue import Queue
+
+
 class TreeNode:
     def __init__(self, data):
         self.data = data
@@ -32,6 +35,21 @@ def post_order_traversal(root_node: TreeNode):
     print(root_node.data)
 
 
+def level_order_traversal(root_node: TreeNode):
+    if root_node is None:
+        return None
+    else:
+        custom_queue = Queue()
+        custom_queue.put(root_node)
+        while not custom_queue.empty():
+            root = custom_queue.get()
+            print(root.data)
+            if root.left_child is not None:
+                custom_queue.put(root.left_child)
+            if root.right_child is not None:
+                custom_queue.put(root.right_child)
+
+
 if __name__ == '__main__':
     tree = TreeNode('Drinks')
     left_child = TreeNode('Hot')
@@ -48,3 +66,5 @@ if __name__ == '__main__':
     inorder_traversal(root_node=tree)
     print("**********************\n")
     post_order_traversal(root_node=tree)
+    print("**********************\n")
+    level_order_traversal(root_node=tree)
