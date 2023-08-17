@@ -91,14 +91,42 @@ def search(root_node: BinarySearchTreeNode, value):
             search(root_node.right_node, value)
 
 
+def get_minimum_value_node(root_node: BinarySearchTreeNode):
+    current = root_node
+    while current.left_node is not None:
+        current = current.left_node
+    return current
+
+
+def delete_node(root_node: BinarySearchTreeNode, node_value):
+    if root_node is None:
+        return root_node
+    if node_value < root_node.data:
+        root_node.left_node = delete_node(root_node.left_node, node_value)
+    elif node_value > root_node.data:
+        root_node.right_node = delete_node(root_node.right_node, node_value)
+    else:
+        if root_node.left_node is None:
+            temp = root_node.right_node
+            return temp
+        if root_node.right_node is None:
+            temp = root_node.left_node
+            root_node = None
+            return temp
+        temp = get_minimum_value_node(root_node.right_node)
+        root_node.data = temp.data
+        special = delete_node(root_node.right_node, temp.data)
+        root_node.right_node = special
+    return root_node
+
 
 if __name__ == '__main__':
     bst = BinarySearchTreeNode(70)
     print(insert(bst, 50))
     print(insert(bst, 90))
     print(insert(bst, 30))
-    print(insert(bst, 60))
     print(insert(bst, 80))
+
     print(insert(bst, 100))
     print(insert(bst, 20))
     print(insert(bst, 40))
@@ -112,4 +140,9 @@ if __name__ == '__main__':
     print()
     search(bst, 40)
     search(bst, 60)
+    search(bst, 1000)    # search(bst, 40)
+    search(bst, 60)
     search(bst, 1000)
+    delete_node(bst, 50)
+    level_order_traversal(root_node=bst)
+    print()
