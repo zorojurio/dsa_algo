@@ -120,6 +120,13 @@ def delete_node(root_node: BinarySearchTreeNode, node_value):
     return root_node
 
 
+def delete_bst(root_node: BinarySearchTreeNode):
+    root_node.data = None
+    root_node.left_node = None
+    root_node.right_node = None
+    return "the BST has been successfully deleted"
+
+
 if __name__ == '__main__':
     bst = BinarySearchTreeNode(70)
     print(insert(bst, 50))
@@ -146,3 +153,4 @@ if __name__ == '__main__':
     delete_node(bst, 50)
     level_order_traversal(root_node=bst)
     print()
+    delete_bst(bst)
