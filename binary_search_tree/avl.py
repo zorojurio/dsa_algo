@@ -1,4 +1,5 @@
 from queue import Queue
+from typing import Union
 
 
 class AVlNode:
@@ -130,7 +131,7 @@ def insert_node(root_node: AVlNode, node_value):
     return root_node
 
 
-def get_minimum_value_node(root_node: AVlNode) -> AVlNode:
+def get_minimum_value_node(root_node: AVlNode) -> Union[None, AVlNode]:
     """
     Find the minimum node value from the right subtree
     :param root_node: node of the right subtree
@@ -151,11 +152,9 @@ def delete_node(root_node: AVlNode, node_value):
     else:
         if root_node.left_child is None:
             temp = root_node.right_child
-            root_node = None
             return temp
         elif root_node.right_child is None:
             temp = root_node.left_child
-            root_node = None
             return temp
         temp = get_minimum_value_node(root_node.right_child)
         root_node.data = temp.data

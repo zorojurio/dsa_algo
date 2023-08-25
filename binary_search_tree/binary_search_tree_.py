@@ -117,7 +117,6 @@ def delete_node(root_node: BinarySearchTreeNode, node_value):
             return temp
         if root_node.right_node is None:
             temp = root_node.left_node
-            root_node = None
             return temp
         temp = get_minimum_value_node(root_node.right_node)
         root_node.data = temp.data
