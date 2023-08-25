@@ -130,13 +130,54 @@ def insert_node(root_node: AVlNode, node_value):
     return root_node
 
 
+def get_minimum_value_node(root_node: AVlNode) -> AVlNode:
+    """
+    Find the minimum node value from the right subtree
+    :param root_node: node of the right subtree
+    :return: minimum node
+    """
+    if root_node is None or root_node.left_child is None:
+        return root_node
+    return get_minimum_value_node(root_node.left_child)
+
+
 def delete_node(root_node: AVlNode, node_value):
-    if root_node is None:
+    if not root_node:
         return root_node
     elif node_value < root_node.data:
         root_node.left_child = delete_node(root_node.left_child, node_value)
     elif node_value > root_node.data:
         root_node.right_child = delete_node(root_node.right_child, node_value)
+    else:
+        if root_node.left_child is None:
+            temp = root_node.right_child
+            root_node = None
+            return temp
+        elif root_node.right_child is None:
+            temp = root_node.left_child
+            root_node = None
+            return temp
+        temp = get_minimum_value_node(root_node.right_child)
+        root_node.data = temp.data
+        root_node.right_child = delete_node(root_node.right_child, temp.data)
+    balance = get_balance(root_node)
+    if balance > 1 and get_balance(root_node.left_child) >= 0:
+        return rotate_right(root_node)
+    if balance < -1 and get_balance(root_node.right_child) <= 0:
+        return rotate_left(root_node)
+    if balance > 1 and get_balance(root_node.left_child) < 0:
+        root_node.left_child = rotate_left(root_node.left_child)
+        return rotate_right(root_node)
+    if balance < -1 and get_balance(root_node.right_child) < 0:
+        root_node.right_child = rotate_right(root_node.right_child)
+        return rotate_left(root_node)
+    return root_node
+
+
+def delete_avl(root_node: AVlNode):
+    root_node.data = None
+    root_node.left_child = None
+    root_node.right_child = None
 
 
 if __name__ == '__main__':
@@ -148,5 +189,9 @@ if __name__ == '__main__':
     avl_tree = insert_node(avl_tree, 20)
     level_order_traversal(avl_tree)
     print()
-    avl_tree = insert_node(avl_tree, 25 )
+    avl_tree = insert_node(avl_tree, 25)
+    level_order_traversal(avl_tree)
+    print('deleting 15')
+    avl_tree = delete_node(avl_tree, 10)
+    delete_avl(avl_tree)
     level_order_traversal(avl_tree)

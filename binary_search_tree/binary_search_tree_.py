@@ -102,10 +102,16 @@ def delete_node(root_node: BinarySearchTreeNode, node_value):
     if root_node is None:
         return root_node
     if node_value < root_node.data:
-        root_node.left_node = delete_node(root_node.left_node, node_value)
+        left_deleted_node = delete_node(root_node.left_node, node_value)
+        root_node.left_node = left_deleted_node
     elif node_value > root_node.data:
-        root_node.right_node = delete_node(root_node.right_node, node_value)
+        right_deleted_node = delete_node(root_node.right_node, node_value)
+        root_node.right_node = right_deleted_node
     else:
+        """
+        if the value of left node is None, take the right because left child is already none
+        if there is a value for left child, and if right node is none take the left node 
+        """
         if root_node.left_node is None:
             temp = root_node.right_node
             return temp
@@ -144,13 +150,8 @@ if __name__ == '__main__':
     post_order_traversal(root_node=bst)
     print()
     level_order_traversal(root_node=bst)
-    print()
-    search(bst, 40)
-    search(bst, 60)
-    search(bst, 1000)    # search(bst, 40)
-    search(bst, 60)
-    search(bst, 1000)
-    delete_node(bst, 50)
+    print('deleting ')
+    delete_node(bst, 70)
     level_order_traversal(root_node=bst)
     print()
     delete_bst(bst)
