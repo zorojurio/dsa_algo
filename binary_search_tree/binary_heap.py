@@ -61,7 +61,6 @@ class Heap:
     def heapify_tree_extract(cls, root_node, parent_index, heap_type):
         left_index = parent_index * 2
         right_index = parent_index * 2 + 1
-        swap_index = 0
 
         if root_node.heap_size < left_index:  # check if the tree has children
             return
