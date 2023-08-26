@@ -1,5 +1,3 @@
-
-
 def cal_common_factor(a, b):
     if a < 0:
         a = a * -1
@@ -8,7 +6,7 @@ def cal_common_factor(a, b):
     if b == 0:
         return a
     else:
-        return cal_common_factor(b, a%b)
+        return cal_common_factor(b, a % b)
 
 
 if __name__ == '__main__':

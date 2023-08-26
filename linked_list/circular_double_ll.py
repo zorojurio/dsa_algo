@@ -1,6 +1,3 @@
-
-
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -152,9 +149,9 @@ if __name__ == '__main__':
     print([node.value for node in linked_list])
     linked_list.insert(0, 0)
     print([node.value for node in linked_list])
-    linked_list.insert(1,1)
+    linked_list.insert(1, 1)
     print([node.value for node in linked_list])
-    linked_list.insert(2,2)
+    linked_list.insert(2, 2)
     print([node.value for node in linked_list])
     linked_list.insert(99, -1)
     print([node.value for node in linked_list])
@@ -169,4 +166,3 @@ if __name__ == '__main__':
     print([node.value for node in linked_list])
     linked_list.delete_entire_list()
     print([node.value for node in linked_list])
-
