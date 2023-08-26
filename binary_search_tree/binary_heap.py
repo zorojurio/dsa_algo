@@ -56,10 +56,74 @@ class Heap:
         return "Value has been successfully added"
 
     @classmethod
-    def heapify_tree_extract(cls, root_node, index, heap_type):
-        left_index = index * 2
-        right_index = index * 2 + 1
-        swap_child = 0
+    def heapify_tree_extract(cls, root_node, parent_index, heap_type):
+        left_index = parent_index * 2
+        right_index = parent_index * 2 + 1
+        swap_index = 0
+
+        if root_node.heap_size < left_index:  # check if the tree has children
+            return
+        elif root_node.heap_size == left_index:   # only one child that is left child
+            if heap_type == "Min":
+                if root_node.custom_list[parent_index] > root_node.custom_list[left_index]:
+                    # MIN HEAP, parents value is higher than left childs value, hence swaping values
+                    temp = root_node.custom_list[parent_index]
+                    root_node.custom_list[parent_index] = root_node.custom_list[left_index]
+                    root_node.custom_list[left_index] = temp
+                return
+            else:
+                if root_node.custom_list[parent_index] < root_node.custom_list[left_index]:
+                    # MAX HEAP, parents value is less than left childs value, hence swaping values
+                    temp = root_node.custom_list[parent_index]
+                    root_node.custom_list[parent_index] = root_node.custom_list[left_index]
+                    root_node.custom_list[left_index] = temp
+                return
+
+        else:
+            # Case where root node has two children
+            if heap_type == "Min":
+                # MIN HEAP, find the minumum and replace with the root node
+                if root_node.custom_list[left_index] < root_node.custom_list[right_index]:
+                    # if the left value is less, swap child will be left child
+                    swap_index = left_index
+                else:
+                    # if the right value is less, swap child will be left child
+                    swap_index = right_index
+
+                if root_node.custom_list[parent_index] > root_node.custom_list[swap_index]:
+                    # replace the smallest with parent
+                    # MIN HEAP, if parent value > min(left_child, right_child), Hence Swapping
+                    temp = root_node.custom_list[parent_index]
+                    root_node.custom_list[parent_index] = root_node.custom_list[swap_index]
+                    root_node.custom_list[swap_index] = temp
+            else:
+                # MAX HEAP, find the maximum nad replace with the root node
+                # swap_index = max(left_child, right_child)
+                if root_node.custom_list[left_index] > root_node.custom_list[right_index]:
+                    # if the left value is gterater, swap child will be left child
+                    swap_index = left_index
+                else:
+                    # if the right value is greater, swap child will be left child
+                    swap_index = right_index
+                if root_node.custom_list[parent_index] < root_node.custom_list[swap_index]:
+                    # replace the largest with parent
+                    # MIN HEAP, if parent value < max(left_child, right_child), Hence Swapping
+                    temp = root_node.custom_list[parent_index]
+                    root_node.custom_list[parent_index] = root_node.custom_list[swap_index]
+                    root_node.custom_list[swap_index] = temp
+        cls.heapify_tree_extract(root_node, swap_index, heap_type)
+
+    @classmethod
+    def extract_node(cls, root_node, heap_type):
+        if root_node.heap_size == 0:
+            return
+        else:
+            extracted_node = root_node.custom_list[1]
+            root_node.custom_list[1] = root_node.custom_list[root_node.heap_size]
+            root_node.custom_list[root_node.heap_size] = None
+            root_node.heap_size -= 1
+            cls.heapify_tree_extract(root_node, 1, heap_type)
+            return extracted_node
 
 
 if __name__ == '__main__':
@@ -72,4 +136,5 @@ if __name__ == '__main__':
     Heap.insert_node(heap, 5, 'Max')
     Heap.insert_node(heap, 50, 'Max')
     Heap.insert_node(heap, 30, 'Max')
+    Heap.extract_node(heap, "Max")
     Heap.level_order_traversal(heap)
