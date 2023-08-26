@@ -25,6 +25,8 @@ class Heap:
     def level_order_traversal(root_node):
         if not root_node:
             return
+        if not root_node.custom_list:
+            return
         for i in range(1, root_node.heap_size + 1):
             print(root_node.custom_list[i], end=", ")
 
@@ -125,6 +127,10 @@ class Heap:
             cls.heapify_tree_extract(root_node, 1, heap_type)
             return extracted_node
 
+    @classmethod
+    def delete_entire_binary_heap(cls, root_node):
+        root_node.custom_list = None
+
 
 if __name__ == '__main__':
     heap = Heap(10)
@@ -137,4 +143,6 @@ if __name__ == '__main__':
     Heap.insert_node(heap, 50, 'Max')
     Heap.insert_node(heap, 30, 'Max')
     Heap.extract_node(heap, "Max")
+    Heap.level_order_traversal(heap)
+    Heap.delete_entire_binary_heap(heap)
     Heap.level_order_traversal(heap)
