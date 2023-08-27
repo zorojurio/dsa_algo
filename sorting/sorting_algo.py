@@ -72,11 +72,47 @@ def bucket_sort(my_list: List) -> List:
     return my_list
 
 
+def merge_sort(array: List) -> None:
+    length = len(array)
+    if len(array) > 1:
+        mid_index = len(array) // 2
+
+        left_array = array[:mid_index]
+        right_array = array[mid_index:]
+
+        merge_sort(left_array)
+        merge_sort(right_array)
+
+        left_index = right_index = sorted_index = 0
+        while left_index < len(left_array) and right_index < len(right_array):
+            if left_array[left_index] < right_array[right_index]:
+                array[sorted_index] = left_array[left_index]
+                left_index += 1
+            else:
+                array[sorted_index] = right_array[right_index]
+                right_index += 1
+            sorted_index += 1
+            
+        # Checking if any element was left
+        while left_index < len(left_array):
+            array[sorted_index] = left_array[left_index]
+            left_index += 1
+            sorted_index += 1
+
+        while right_index < len(right_array):
+            array[sorted_index] = right_array[right_index]
+            right_index += 1
+            sorted_index += 1
+
+
 new_list = [5, 5, 12, 45, 32, 65, 987, 12, 54, 32, 54, 1]
 print(bubble_sort(my_list=new_list))
 new_list = [5, 5, 12, 45, 32, 65, 987, 12, 54, 32, 54, 1]
 print(selection_sort(my_list=new_list))
 new_list = [5, 5, 12, 45, 32, 65, 987, 12, 54, 32, 54, 1]
 print(insertion_sort(my_list=new_list))
-new_list = [5, 5, 12, 45, 32, 65, 987, 12, 54, 32, 54, 1]
+new_list = [5, 3, 12, 45, 32, 65, 987, 12, 54, 32, 54, 22]
 print(bucket_sort(my_list=new_list))
+new_list = [38, 27, 43, 3, 9, 82, 10]
+merge_sort(array=new_list)
+print(new_list)
