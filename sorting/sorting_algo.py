@@ -3,6 +3,11 @@ from typing import List
 
 
 def bubble_sort(my_list: List) -> List:
+    """
+    compares adjacent elements, and swaps them if they are in the wrong order,
+    :param my_list: list
+    :return: my_list: list
+    """
     for i in range(len(my_list) - 1):
         for j in range(len(my_list) - 1 - i):
             if my_list[j] > my_list[j + 1]:
@@ -11,6 +16,11 @@ def bubble_sort(my_list: List) -> List:
 
 
 def selection_sort(my_list: List) -> List:
+    """
+    selects the minimum element from an unsorted part of the list and places it at the beginning.
+    :param my_list: list
+    :return my_list:
+    """
     for i in range(len(my_list)):
         min_index = i
         for j in range(i + 1, len(my_list)):
@@ -21,6 +31,11 @@ def selection_sort(my_list: List) -> List:
 
 
 def insertion_sort(my_list: List) -> List:
+    """
+     comparing each element with its predecessors and shifting them to the right until the correct position is found.
+    :param my_list:
+    :return:
+    """
     for i in range(1, len(my_list)):
         value_to_sort = my_list[i]
         while my_list[i - 1] > value_to_sort and i > 0:
@@ -30,6 +45,12 @@ def insertion_sort(my_list: List) -> List:
 
 
 def bucket_sort(my_list: List) -> List:
+    """
+     Elements are distributed into these buckets based on their value ranges, and then each bucket is
+     sorted individually, combining the results to produce the sorted output.
+    :param my_list:
+    :return:
+    """
     number_of_buckets = round(math.sqrt(len(my_list)))
     max_value = max(my_list)
     buckets = []
