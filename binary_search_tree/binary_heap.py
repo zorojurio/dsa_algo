@@ -67,14 +67,14 @@ class Heap:
         elif root_node.heap_size == left_index:   # only one child that is left child
             if heap_type == "Min":
                 if root_node.custom_list[parent_index] > root_node.custom_list[left_index]:
-                    # MIN HEAP, parents value is higher than left childs value, hence swaping values
+                    # MIN HEAP, parents value is higher than left children value, hence swapping values
                     temp = root_node.custom_list[parent_index]
                     root_node.custom_list[parent_index] = root_node.custom_list[left_index]
                     root_node.custom_list[left_index] = temp
                 return
             else:
                 if root_node.custom_list[parent_index] < root_node.custom_list[left_index]:
-                    # MAX HEAP, parents value is less than left childs value, hence swaping values
+                    # MAX HEAP, parents value is less than left children value, hence swapping values
                     temp = root_node.custom_list[parent_index]
                     root_node.custom_list[parent_index] = root_node.custom_list[left_index]
                     root_node.custom_list[left_index] = temp
@@ -83,7 +83,7 @@ class Heap:
         else:
             # Case where root node has two children
             if heap_type == "Min":
-                # MIN HEAP, find the minumum and replace with the root node
+                # MIN HEAP, find the minimum and replace with the root node
                 if root_node.custom_list[left_index] < root_node.custom_list[right_index]:
                     # if the left value is less, swap child will be left child
                     swap_index = left_index
@@ -101,7 +101,7 @@ class Heap:
                 # MAX HEAP, find the maximum nad replace with the root node
                 # swap_index = max(left_child, right_child)
                 if root_node.custom_list[left_index] > root_node.custom_list[right_index]:
-                    # if the left value is gterater, swap child will be left child
+                    # if the left value is Greater, swap child will be left child
                     swap_index = left_index
                 else:
                     # if the right value is greater, swap child will be left child
