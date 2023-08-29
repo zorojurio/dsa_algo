@@ -53,16 +53,18 @@ class Graph:
                     queue.append(adjacency_vertex)
 
     def depth_first_search(self, vertex):
-        visited = set()
-        stack = [vertex]
-        while stack:
-            current_vertex = stack.pop()
-            if current_vertex not in visited:
+        visited = set()  # O(1)
+        stack = [vertex]  # O(1)
+        while stack:  # o(V)
+            current_vertex = stack.pop()  # o(1)
+            if current_vertex not in visited:  # o(1)
                 print(current_vertex)
                 visited.add(current_vertex)
-            for adjacency_vertex in self.adjacency_list[current_vertex]:
+            for adjacency_vertex in self.adjacency_list[current_vertex]:  # O(E) E is number of edges
                 if adjacency_vertex not in visited:
                     stack.append(adjacency_vertex)
+        # O(V+E)
+        # O(V) number of vertices
 
 
 if __name__ == '__main__':
