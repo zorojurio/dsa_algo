@@ -52,6 +52,18 @@ class Graph:
                     visited.add(adjacency_vertex)
                     queue.append(adjacency_vertex)
 
+    def depth_first_search(self, vertex):
+        visited = set()
+        stack = [vertex]
+        while stack:
+            current_vertex = stack.pop()
+            if current_vertex not in visited:
+                print(current_vertex)
+                visited.add(current_vertex)
+            for adjacency_vertex in self.adjacency_list[current_vertex]:
+                if adjacency_vertex not in visited:
+                    stack.append(adjacency_vertex)
+
 
 if __name__ == '__main__':
     custom_graph = Graph()
@@ -62,9 +74,10 @@ if __name__ == '__main__':
     custom_graph.add_vertex('e')
     custom_graph.add_edge('a', 'b')
     custom_graph.add_edge('b', 'e')
-    custom_graph.add_edge('e', 'd')
-    custom_graph.add_edge('d', 'c')
     custom_graph.add_edge('c', 'a')
+    custom_graph.add_edge('d', 'c')
+    custom_graph.add_edge('e', 'd')
+
     # print(custom_graph)
     # custom_graph.remove_edge('a', 'd')
     # custom_graph.remove_edge('d', 'c')
@@ -81,4 +94,6 @@ if __name__ == '__main__':
     # print('After deleting vertex D')
     print(custom_graph)
     custom_graph.breath_first_search('a')
+    print('Depth First Search')
+    custom_graph.depth_first_search('a')
     # delete vertex of D
