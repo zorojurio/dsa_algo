@@ -10,9 +10,9 @@ class Edge:
 
     def __str__(self) -> str:
         return (
-            f"{self.weight} \n"
-            f"{self.start_vertex} \n"
-            f"{self.target_vertex} \n"
+            f"{self.weight}-"
+            f"{self.start_vertex}-"
+            f"{self.target_vertex}"
         )
 
 
@@ -36,22 +36,18 @@ class Node:
         return self.min_distance < other.min_distance
 
     def __str__(self):
-        return (
-            f"{self.name} \n"
-            f"{self.visited} \n"
-            f"{self.predecessor} \n"
-            f"{self.neighbours} \n"
-            f"{self.min_distance} \n"
-        )
+        return f"{self.name}"
 
 
 class Dijkstra:
     def __init__(self):
         self.heap = []
 
+    def __str__(self):
+        return f'{self.heap}'
+
     def calculate(self, start_vertex: Node):
         start_vertex.min_distance = 0
-        # TODO: check the return value
         heapq.heappush(self.heap, start_vertex)
         while self.heap:
             # pop element with the lowest distance
