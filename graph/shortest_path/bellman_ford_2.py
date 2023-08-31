@@ -67,12 +67,11 @@ if __name__ == '__main__':
     c = Vertex('C')
     d = Vertex('D')
     e = Vertex('E')
-    f = Vertex('F')
 
     graph = Graph(6)
 
     graph.add_edge(a, c, 6)
-    graph.add_edge(a, c, 6)
+    graph.add_edge(a, c, -6)
     graph.add_edge(b, a, 3)
     graph.add_edge(c, d, 1)
     graph.add_edge(d, c, 2)
@@ -80,6 +79,6 @@ if __name__ == '__main__':
     graph.add_edge(e, b, 4)
     graph.add_edge(e, d, 2)
 
-    print(graph.find_paths(e))
-    print(a.min_distance)
-    graph.get_shortest_path(c)
+    if graph.find_paths(e):
+        print(a.min_distance)
+        graph.get_shortest_path(a)
