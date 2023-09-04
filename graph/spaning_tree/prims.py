@@ -30,3 +30,12 @@ example_graph = {
 }
 
 print(dict(create_spanning_tree(example_graph, 'A')))
+# second test
+graph_two = {
+    'A': {'B': 5, 'C': 13, 'E': 15},
+    'B': {'A': 5, 'C': 10, 'D': 8},
+    'C': {'A': 13, 'B': 10, 'E': 20, 'D': 6},
+    'D': {'B': 8, 'C': 6},
+    'E': {'A': 15, 'C': 20}
+}
+print(dict(create_spanning_tree(graph_two, 'A')))
